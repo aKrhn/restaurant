@@ -3,7 +3,7 @@
 
   <div class="d-sm-flex align-item-center justify-content-between mb-4">
     <h1 class="h3 mb-0 ml-4 text-gray-800">
-      SubCategory
+      Update SubCategory
     </h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -12,7 +12,7 @@
         </a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
-        SubCategory
+        Update SubCategory
       </li>
     </ol>
   </div>
@@ -24,13 +24,14 @@
       </div>
     @endif
     <div class="col-lg-10">
-      <form action="{{ route('subcategory.store') }}" method="POST">
+      <form action="{{ route('subcategory.update', [$subcategory -> id]) }}" method="POST">
+        {{ method_field('PUT') }}
         @csrf
         <div class="card mb-6">
           <div>
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary">
-                Create SubCategory
+                Update SubCategory
               </h6>
             </div>
             <div class="card-body">
@@ -44,7 +45,7 @@
                   class="form-control @error('name') is-invalid @enderror"
                   id=""
                   aria-describedby=""
-                  placeholder="Enter the name of subcategory">
+                  value="{{$subcategory -> name}}">
                   @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -56,10 +57,12 @@
                  <label class="custom-file">
                     Choose Category
                   </label>
-                  <select name="category" class="form-control">
+                  <select name="category" class="form-control @error('name') is-invalid @enderror">
                     <option value="">Select Category</option>
                     @foreach(App\Category::all() as $category)
-                    <option value="{{$category -> id}}">
+                    <option value="{{$category -> id}}"
+                      @if($subcategory -> category_id == $category -> id) selected
+                      @endif>
                       {{$category -> name}}
                     </option>
                     @endforeach
@@ -74,4 +77,5 @@
       </form>
     </div>
   </div>
+
 @endsection
