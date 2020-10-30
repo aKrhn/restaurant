@@ -17,13 +17,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/index', function () {
-    return view('admin.dashboard');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::resource('category', 'CategoryController');
-Route::resource('subcategory', 'SubcategoryController');
-Route::resource('product', 'ProductController');
-Route::get('subcategories/{id}', 'ProductController@loadSubCategories');
-
 Auth::routes();
+Route::get('/home', 'HomeController@index') -> name('home');
+
+Route::group(['prefix' => 'auth', 'middleware' => ['auth', 'isAdmin']],
+function(){
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::resource('category', 'CategoryController');
+    Route::resource('subcategory', 'SubcategoryController');
+    Route::resource('product', 'ProductController');
+    Route::get('subcategories/{id}', 'ProductController@loadSubCategories');
+
+});
+
