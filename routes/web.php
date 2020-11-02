@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'ProductListController@index');
+Route::get('/product/{id}', 'ProductListController@show') -> name('product.view');
+Route::get('/category/{name}', 'ProductListController@allProduct') -> name('product.list');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index') -> name('home');

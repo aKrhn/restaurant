@@ -43,11 +43,31 @@ class DatabaseSeeder extends Seeder
     Product::create([
       'name'=>'Jhonnie-walker Whiskey',
       'image'=>'product/VcIONa31vVgL1ncdIjEyIKvwvSeRpRV50YWTuPdG.jpeg',
-      'price'=> rand(700,1000),
+      'price'=> 700,
       'description'=>'This is the description of a product',
       'additional_info'=>'This is additional info',
       'category_id'=> 2,
       'subcategory_id'=>1
+    ]);
+
+    Product::create([
+      'name'=>'Merlot Wine',
+      'image'=>'product/healthy-eating-ingredients-1200x628-facebook-1200x628.jpeg',
+      'price'=> 500,
+      'description'=>'This is the description of a product',
+      'additional_info'=>'This is additional info',
+      'category_id'=> 2,
+      'subcategory_id'=>1
+    ]);
+
+    Product::create([
+      'name'=>'Aspava',
+      'image'=>'product/iskender3slider1.jpeg',
+      'price'=> 50,
+      'description'=>'This is the description of a product',
+      'additional_info'=>'This is additional info',
+      'category_id'=> 1,
+      'subcategory_id'=>2
     ]);
 
     User::create([
