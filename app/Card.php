@@ -41,9 +41,20 @@ class Card
     } else
     {
       $this -> totalQuantity += 1;
-      $this -> totalPrice += $totalPrice;
+      $this -> totalPrice += $product -> price;
     }
+      $this -> items[$product -> id]['quantity'] += 1;
   }
+
+  public function updateQuantity($id, $quantity)
+  {
+    $this -> totalQuantity -= $this -> items[$id]['quantity'];
+    $this -> totalPrice -= $this -> items[$id]['price'] * $this -> items[$id]['quantity'];
+    $this -> items[$id]['quantity'] = $quantity;
+    $this -> totalQuantity += $quantity;
+    $this -> totalPrice += $this -> items[$id]['price'] * $quantity;
+  }
+
 }
 
 ?>

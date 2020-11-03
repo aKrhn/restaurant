@@ -2,48 +2,53 @@
 
 @section('content')
 
-<div class="container">
-  <table class="table">
-  <thead>
+ <div class="container">
+   <table class="table">
+    <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Product</th>
       <th scope="col">Image</th>
+      <th scope="col">Product</th>
       <th scope="col">Price</th>
-      <th scope="col">Qty</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Remove</th>
     </tr>
   </thead>
   <tbody>
 
-@php $i = 1;
-@endphp
+    @if($card)
+  @php $i=1 @endphp
 
-    @foreach ($card -> items as $product)
-
+@foreach($card -> items as $product)
     <tr>
-      <th scope="row">{{ $i++ }}</th>
-      <td><img src="{{ Storage::url($product['image']) }}" width="100"></td>
-      <td>{{ $product['name'] }}</td>
-      <td>{{ $product['price'] }}</td>
-      <td>
-        <input type="text" name="{{ $product['quantity'] }}">
-        <button class="btn btn-secondary btn-sm">
-          <i class="fas fa-sync">
-          </i>
-          Update
-        </button>
-      </td>
-      <td><button class="btn btn-danger">Remove</button></td>
-    </tr>
-    @endforeach
+      <th scope="row">{{$i++}}</th>
 
+      <td><img src="{{Storage::url($product['image'])}}" width="100"></td>
+      <td>{{$product['name']}}</td>
+      <td>${{$product['price']}}</td>
+      <td>
+    <form action="{{route('card.update',$product['id'])}}" method="post">@csrf
+        <input type="text" name="quantity" value="{{$product['quantity']}}">
+        <button class="btn btn-secondary btn-sm">
+          <i class="fas fa-sync"></i>Update
+        </button>
+      </form>
+    </td>
+      <td>
+        <button class="btn btn-danger">Remove</button>
+      </td>
+    </tr>
+   @endforeach
   </tbody>
 </table>
 <hr>
 <div class="card-footer">
-    <button class="btn btn-warning">Continue Shopping</button>
-    <span style="margin-left:300px;">Total Price:{{ $card -> totalPrice}} TL</span>
-    <button class="btn btn-info float-right">Checkout</button>
+  <a href="{{url('/')}}"><button class="btn btn-primary">Continue shopping</button></a>
+  <span style="margin-left: 300px;">Total Price:{{$card -> totalPrice}} TL</span>
 </div>
-</div>
-@endsection
+@else
+<td>No items in card</td>
+@endif
+
+ </div>
+ @endsection

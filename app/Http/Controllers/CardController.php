@@ -35,4 +35,18 @@ class CardController extends Controller
         }
         return view('card', compact('card'));
     }
+
+    public function updateCard(Request $request, Product $product){
+        $request->validate([
+            'qty'=>'required|numeric|min:1'
+        ]);
+
+        $card = new Card(session()->get('card'));
+        $card -> updateQuantity($product -> id, $request -> quantity);
+        session() -> put('cart',$cart);
+        notify() -> success('Cart updated!');
+        return redirect() -> back();
+    }
+
+
 }

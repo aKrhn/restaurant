@@ -26,6 +26,8 @@ Route::get('/product/{id}', 'ProductListController@show') -> name('product.view'
 Route::get('/category/{name}', 'ProductListController@allProduct') -> name('product.list');
 Route::get('/addToCard/{product}', 'CardController@addToCard') -> name('add.card');
 Route::get('/card', 'CardController@showCard') -> name('card.show');
+Route::get('/products/{product}', 'CardController@updateCard') -> name('card.update');
+
 
 
 
