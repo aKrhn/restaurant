@@ -31,14 +31,20 @@ class DatabaseSeeder extends Seeder
     ]);
 
     Subcategory::create([
+      'name'=>'meat',
+      'category_id'=>1
+    ]);
+
+    Subcategory::create([
       'name'=>'alcohol',
       'category_id'=>2
     ]);
 
     Subcategory::create([
-      'name'=>'meat',
-      'category_id'=>1
+      'name'=>'beverages',
+      'category_id'=>2
     ]);
+
 
     Product::create([
       'name'=>'Jhonnie-walker Whiskey',
@@ -54,6 +60,16 @@ class DatabaseSeeder extends Seeder
       'name'=>'Merlot Wine',
       'image'=>'product/healthy-eating-ingredients-1200x628-facebook-1200x628.jpeg',
       'price'=> 500,
+      'description'=>'This is the description of a product',
+      'additional_info'=>'This is additional info',
+      'category_id'=> 2,
+      'subcategory_id'=>1
+    ]);
+
+    Product::create([
+      'name'=>'Coke',
+      'image'=>'product/MW-HX764_coke_c_20200103171249_ZQ.jpg',
+      'price'=> 5,
       'description'=>'This is the description of a product',
       'additional_info'=>'This is additional info',
       'category_id'=> 2,

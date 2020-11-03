@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @notifyCss
+    @include('notify::messages')
+    @notifyJs
 </head>
 <body>
     <div id="app">
@@ -39,6 +42,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                            <a href="{{ route('card.show') }}" class="nav-link">
+                                <span class="fas fa-shopping-cart">
+                                    ({{ session() -> has('card') ? session() -> get('card') -> totalQuantity : '0' }})
+                                </span>
+                            </a>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
