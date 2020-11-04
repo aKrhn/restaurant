@@ -41,7 +41,7 @@
           {{ $product -> additional_info }}
         </p>
       <hr>
-      <a href="#" class="btn btn-lg btn-outline-primary text-uppercase">
+      <a href="{{ route('add.card', [$product -> id]) }}" class="btn btn-lg btn-outline-primary text-uppercase">
         Add to cart
       </a>
     </section>

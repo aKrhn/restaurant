@@ -25,7 +25,7 @@
     @endif
     <div class="col-lg-10">
       <form action="{{ route('category.update', [$category -> id]) }}" method="POST" enctype="multipart/form-data">
-        @csrf {{ method_field('PUT') }}
+        @csrf
         <div class="card mb-6">
           <div>
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

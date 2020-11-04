@@ -3,6 +3,13 @@
 @section('content')
 
  <div class="container">
+    @if($errors->any())
+
+   @foreach($errors->all() as $error)
+        <div class="alert alert-danger">{{$error}}</div>
+   @endforeach
+
+   @endif
    <table class="table">
     <thead>
     <tr>
@@ -23,19 +30,25 @@
     <tr>
       <th scope="row">{{$i++}}</th>
 
-      <td><img src="{{Storage::url($product['image'])}}" width="100"></td>
-      <td>{{$product['name']}}</td>
-      <td>${{$product['price']}}</td>
+      <td><img src="{{ Storage::url($product['image']) }}" width="100"></td>
+      <td>{{ $product['name'] }}</td>
+      <td>{{ $product['price'] }} TL</td>
       <td>
-    <form action="{{route('card.update',$product['id'])}}" method="post">@csrf
-        <input type="text" name="quantity" value="{{$product['quantity']}}">
+    <form action="{{route('card.update', $product['id'])}}" method="POST">
+        @csrf
+        <input type="text" name="quantity" value="{{ $product['quantity'] }}">
         <button class="btn btn-secondary btn-sm">
-          <i class="fas fa-sync"></i>Update
+          <i class="fas fa-sync">
+          </i>
+          Update
         </button>
       </form>
     </td>
       <td>
-        <button class="btn btn-danger">Remove</button>
+        <form action="{{route('card.destroy', $product['id'])}}" method="POST">
+            @csrf
+            <button class="btn btn-danger">Remove</button>
+        </form>
       </td>
     </tr>
    @endforeach
@@ -44,7 +57,7 @@
 <hr>
 <div class="card-footer">
   <a href="{{url('/')}}"><button class="btn btn-primary">Continue shopping</button></a>
-  <span style="margin-left: 300px;">Total Price:{{$card -> totalPrice}} TL</span>
+  <span style="margin-left: 300px;">Total Price:{{ $card -> totalPrice }} TL</span>
 </div>
 @else
 <td>No items in card</td>

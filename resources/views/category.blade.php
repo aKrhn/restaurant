@@ -33,9 +33,11 @@
                   View
                 </button>
                </a>
+               <a href="{{ route('add.card', [$product -> id]) }}">
                 <button type="button" class="btn btn-sm btn-outline-primary">
                   Add to cart
                 </button>
+                </a>
               </div>
               <small class="text-muted">{{ $product -> price }} TL</small>
             </div>
