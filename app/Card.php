@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+
 class Card
 {
   public $items = [];
@@ -48,10 +49,29 @@ class Card
 
   public function updateQuantity($id, $quantity)
   {
-    $this -> totalQuantity -= $this -> items[$id]['quantity'];
-    $this -> totalPrice -= $this -> items[$id]['price'] * $this -> items[$id]['quantity'];
-    $this -> totalQuantity += $quantity;
-    $this -> totalPrice += $this -> items[$id]['price'] * $quantity;
+    if($quantity>0){
+        $this -> items[$id]['quantity'] = $quantity;
+    } else {
+        $this->destroy($id);
+    }
+
+  }
+
+
+  public function getTotalPrice() {
+    $totalPrice = 0;
+    foreach($this->items  as $itemId => $item){
+        $totalPrice += $item['quantity'] * $item['price'];
+    }
+    return $totalPrice;
+  }
+
+  public function getTotalQuantity(){
+    $totalQuantity = 0;
+    foreach($this->items  as $itemId => $item){
+        $totalQuantity += $item['quantity'];
+    }
+    return $totalQuantity;
   }
 
   public function destroy($id)

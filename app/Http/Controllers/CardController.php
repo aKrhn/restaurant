@@ -43,6 +43,7 @@ class CardController extends Controller
         ]);
 
         $card = new Card(session()->get('card'));
+
         $card -> updateQuantity($product -> id, $request -> quantity);
         session() -> put('card',$card);
         notify() -> success('Card updated!');

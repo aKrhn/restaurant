@@ -27,17 +27,24 @@ class ProductListController extends Controller
 
     public function allProduct($name, Request $request)
     {
-        $category = Category::where('slug', $name) -> first();
-        if($request -> subcategory)
-        {
-            $products = $this -> filterProducts($request);
-        } else
-        {
-            $products = Product::where('category_id', $category -> id) -> get();
+        $category = Category::with('subcategory')->where('slug', $name) -> first();
+
+        if($request->has('subcategory')){
+            $products = $this -> filterProducts($request->get('subcategory'));
+        } else {
+            $products = Product::where('category_id',$category->id)->get();
         }
-        $subcategories = Subcategory::where('category_id', $category -> id) -> get();
+
+        // if($request -> subcategory)
+        // {
+        //     $products = $this -> filterProducts($request);
+        // } else
+        // {
+        //     $products = Product::where('category_id', $category -> id) -> get();
+        // }
+        // $subcategories = Subcategory::where('category_id', $category -> id) -> get();
         $slug = $name;
-        return view('category', compact('products', 'subcategories', 'slug'));
+        return view('category', compact('products', 'slug','category'));
     }
     public function filterProducts(Request $request)
     {

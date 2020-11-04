@@ -114,11 +114,30 @@
                     Choose Category
                   </label>
                   <select name="category" class="form-control">
-                    <option value="">Select Category</option>
-                    @foreach(App\Category::all() as $category)
-                    <option value="{{$category -> id}}">
-                      {{$category -> name}}
-                    </option>
+                    <option value="" selected disabled>Select Category</option>
+                    @foreach(App\Category::getMainCategories() as $category)
+
+                        @if($category->subcategory()->count() > 0)
+                            <optgroup label="{{$category->name}}">
+
+                                @foreach($category->subcategory as $secondLevelSubCategory)
+                                    @if($secondLevelSubCategory->subcategory()->count() > 0)
+                                         <optgroup label="&nbsp;&nbsp;&nbsp;{{$secondLevelSubCategory->name}}">
+                                            @foreach($secondLevelSubCategory->subcategory as $thirdLevelSubCategory)
+                                                <option value="{{$thirdLevelSubCategory->name}}">
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    {{$thirdLevelSubCategory->name}}</option>
+                                            @endforeach
+                                            </optgroup>
+                                    @else
+                                        <option value="{{$secondLevelSubCategory->name}}"> {{$secondLevelSubCategory->name}}</option>
+                                    @endif
+                                @endforeach
+                            </optgroup>
+                        @else
+                         <option value="{{$category->name}}">{{$category->name}}</option>
+                        @endif
+
                     @endforeach
                   </select>
                 </div>

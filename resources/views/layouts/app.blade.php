@@ -44,7 +44,7 @@
                         <!-- Authentication Links -->
                         <span class="fas fa-shopping-cart">
                             <a href="{{ route('card.show') }}" class="nav-link">
-                                ({{ session() -> has('card') ? session() -> get('card') -> totalQuantity : '0' }})
+                                ({{ session() -> has('card') ? $card = (new App\Card(session() -> get('card'))) -> getTotalQuantity() : '0' }})
                             </a>
                         </span>
                         @guest
