@@ -58,6 +58,11 @@
 <div class="card-footer">
   <a href="{{url('/')}}"><button class="btn btn-primary">Continue shopping</button></a>
   <span style="margin-left: 300px;">Total Price:{{ $card -> totalPrice }} TL</span>
+  <a href="{{ route('card.checkout', $card -> totalPrice) }}">
+      <button class="btn btn-info float-right">
+        Checkout
+      </button>
+  </a>
 </div>
 @else
 <td>No items in card</td>

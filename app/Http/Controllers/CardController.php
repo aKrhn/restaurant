@@ -64,4 +64,9 @@ class CardController extends Controller
             return redirect() -> back();
     }
 
+    public function checkout($amount)
+    {
+        return view('checkout', compact('amount'));
+    }
+
 }

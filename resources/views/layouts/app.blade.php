@@ -42,11 +42,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <span class="fas fa-shopping-cart">
                             <a href="{{ route('card.show') }}" class="nav-link">
-                                <span class="fas fa-shopping-cart">
-                                    ({{ session() -> has('card') ? session() -> get('card') -> totalQuantity : '0' }})
-                                </span>
+                                ({{ session() -> has('card') ? session() -> get('card') -> totalQuantity : '0' }})
                             </a>
+                        </span>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>

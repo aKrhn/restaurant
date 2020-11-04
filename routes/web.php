@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'ProductListController@index');
 Route::get('/product/{id}', 'ProductListController@show') -> name('product.view');
 Route::get('/category/{name}', 'ProductListController@allProduct') -> name('product.list');
-Route::get('/checkout/{amount}', 'CardController@checkout') -> name('card.checkout') -> middleware('auth');
+Route::get('/checkout/{amount}', 'CardController@checkout') -> name('card.checkout');
 Route::get('/addToCard/{product}', 'CardController@addToCard') -> name('add.card');
 Route::get('/card', 'CardController@showCard') -> name('card.show');
 Route::post('/products/{product}', 'CardController@updateCard') -> name('card.update');
