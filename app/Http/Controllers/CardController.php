@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Card;
+use App\User;
+use Cartalyst\Stripe\Laravel\Facades\Stripe;
+
 
 class CardController extends Controller
 {
@@ -69,5 +72,34 @@ class CardController extends Controller
     {
         return view('checkout', compact('amount'));
     }
+
+    public function charge(Request $request)
+    {
+        $charge = Stripe::charges() -> create(
+            [
+                'currency' => 'TL',
+                'source' => $request -> stripeToken,
+                'amount' => $request -> amount,
+                'description' => 'test',
+            ]
+        );
+        $chargeId = $charge['id'];
+        if($chargeId)
+        {
+            auth() -> user() -> orders() -> create(
+                [
+                    'card' => serialize(session() -> get('card'))
+                ]
+            );
+            session() -> forget('card');
+            notify() -> success('Payment completed!');
+            return redirect() -> to('/');
+        } else
+        {
+            return redirect() -> back();
+        }
+        // return $request -> stripeToken;
+    }
+
 
 }
