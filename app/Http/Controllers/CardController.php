@@ -77,7 +77,7 @@ class CardController extends Controller
     {
         $charge = Stripe::charges() -> create(
             [
-                'currency' => 'TL',
+                'currency' => 'TRY',
                 'source' => $request -> stripeToken,
                 'amount' => $request -> amount,
                 'description' => 'test',

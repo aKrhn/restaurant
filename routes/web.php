@@ -47,4 +47,3 @@ function(){
     Route::get('subcategories/{id}', 'ProductController@loadSubCategories');
 
 });
-

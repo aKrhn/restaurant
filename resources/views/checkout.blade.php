@@ -34,6 +34,7 @@
   background-color: #fefde5 !important;}
 </style>
   <div class="container">
+    <div class="row">
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">Checkout</div>
@@ -109,6 +110,19 @@
         </div>
       </div>
     </div>
+    <div class="col-6 col-md-4">
+
+      <card>
+        <card-header>
+          Products
+        </card-header>
+      <card-body>
+
+      </card-body>
+      2of2
+</card>
+    </div>
+    </div>
   </div>
 
   <script src="https://js.stripe.com/v3/"></script>
@@ -161,7 +175,7 @@ form.addEventListener('submit', function(event) {
   var options =
   {
     name:document.getElementById('name').value,
-    adress_line1:document.getElementById('adresss').value,
+    adress_line1:document.getElementById('address').value,
     adress_city:document.getElementById('city').value,
     adress_state:document.getElementById('state').value,
     adress_postalcode:document.getElementById('postalcode').value
